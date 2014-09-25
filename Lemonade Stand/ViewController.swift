@@ -9,6 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // Labels
+    @IBOutlet weak var lblMoney: UILabel!
+    @IBOutlet weak var lblLemonsInv: UILabel!
+    @IBOutlet weak var lblIceInv: UILabel!
+    @IBOutlet weak var lblPurchLemons: UILabel!
+    @IBOutlet weak var lblPurchIce: UILabel!
+    @IBOutlet weak var lblMixLemon: UILabel!
+    @IBOutlet weak var lblMixIce: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +29,14 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    // Buttons Pressed Actions
+    
+    
+    @IBAction func startDayButtonPressed(sender: UIButton) {
+        
+    }
+    
 
 }
 
