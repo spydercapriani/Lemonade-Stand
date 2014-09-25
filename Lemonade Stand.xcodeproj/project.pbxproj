@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D02E49219D4A28100978885 /* Supplies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D02E49119D4A28100978885 /* Supplies.swift */; };
 		3DEDBC7F19D37001002AC355 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDBC7E19D37001002AC355 /* AppDelegate.swift */; };
 		3DEDBC8119D37001002AC355 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEDBC8019D37001002AC355 /* ViewController.swift */; };
 		3DEDBC8419D37001002AC355 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DEDBC8219D37001002AC355 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D02E49119D4A28100978885 /* Supplies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Supplies.swift; sourceTree = "<group>"; };
 		3DEDBC7919D37001002AC355 /* Lemonade Stand.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Lemonade Stand.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DEDBC7D19D37001002AC355 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DEDBC7E19D37001002AC355 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D02E49019D4A27000978885 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3D02E49119D4A28100978885 /* Supplies.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		3DEDBC7019D37001002AC355 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 			children = (
 				3DEDBC7E19D37001002AC355 /* AppDelegate.swift */,
 				3DEDBC8019D37001002AC355 /* ViewController.swift */,
+				3D02E49019D4A27000978885 /* Models */,
 				3DEDBC8219D37001002AC355 /* Main.storyboard */,
 				3DEDBC8519D37001002AC355 /* Images.xcassets */,
 				3DEDBC8719D37001002AC355 /* LaunchScreen.xib */,
@@ -213,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DEDBC8119D37001002AC355 /* ViewController.swift in Sources */,
+				3D02E49219D4A28100978885 /* Supplies.swift in Sources */,
 				3DEDBC7F19D37001002AC355 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +419,7 @@
 				3DEDBC9A19D37001002AC355 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3DEDBC9B19D37001002AC355 /* Build configuration list for PBXNativeTarget "Lemonade StandTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +428,7 @@
 				3DEDBC9D19D37001002AC355 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
