@@ -80,7 +80,7 @@
                                     <rect key="frame" x="31" y="372" width="258" height="57"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdS-Lc-FXE">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdS-Lc-FXE">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Start Day">
@@ -93,7 +93,7 @@
                                     <action selector="startDayButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WA6-Ox-JaY"/>
                                 </connections>
                             </button>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="UKG-if-BH5">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="UKG-if-BH5">
                                 <rect key="frame" x="-47" y="-14" width="94" height="29"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="210" y="89" width="94" height="29"/>
@@ -165,7 +165,7 @@
                                     <rect key="frame" x="155" y="297" width="46" height="21"/>
                                 </variation>
                             </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="duo-IV-3Wm">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="duo-IV-3Wm">
                                 <rect key="frame" x="-47" y="-14" width="94" height="29"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="209" y="256" width="94" height="29"/>
@@ -255,6 +255,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnStartDay" destination="tdS-Lc-FXE" id="NFh-7D-pX5"/>
                         <outlet property="lblIce" destination="B0n-5C-uHB" id="KsQ-Yn-SGZ"/>
                         <outlet property="lblLemons" destination="X1c-yq-yRx" id="Hke-go-GZu"/>
                         <outlet property="lblMixIce" destination="3Tb-1m-9Fh" id="Kxu-dH-ENi"/>
