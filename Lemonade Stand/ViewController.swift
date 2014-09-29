@@ -28,23 +28,23 @@ class ViewController: UIViewController {
     let costLemons:Int = 2
     let costIce:Int = 1
     
-    // Variables
+    // Structs
     var inventory = Supplies(money: 10, lemons: 1, iceCubes: 0)
-    var lemonMix:Int = 1
-    var iceMix:Int = 0
-    var mixRatio:Double = 0
+    var lemonade:LemonadeJar = LemonadeJar()
+    
+    var myCustomers:[Customer] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         if inventory.money == 0 && inventory.lemons == 0 && inventory.iceCubes == 0{ // Reset Game if User runs out of credits/supplies
-            showMessageAlert(header: "Game Over", message: "You ran out of money and supplies! Play Again?")
-            inventory = Supplies(money: 10, lemons: 1, iceCubes: 0)
+            println("Game Over!")
+            resetGame()
         }
         
         updateSupplyView()
-        lemonMix = 1
-        iceMix = 0
+        lemonade.lemons = 1
+        lemonade.iceCubes = 0
         updateMixView()
     }
 
@@ -69,8 +69,8 @@ class ViewController: UIViewController {
             inventory.lemons--                          // reduce lemon inventory
             inventory.money += costLemons               // refund cost of lemon
             updateSupplyView()
-            if lemonMix > inventory.lemons {            // ensure that user isn't capable of mixing supplies they haven't purchased
-                lemonMix = inventory.lemons
+            if lemonade.lemons > inventory.lemons {     // ensure that user isn't capable of mixing supplies they haven't purchased
+                lemonade.lemons = inventory.lemons
                 updateMixView()
             }
         }
@@ -92,32 +92,66 @@ class ViewController: UIViewController {
             inventory.iceCubes--                        // reduce ice inventory
             inventory.money += costIce                  // refund cost of ice
             updateSupplyView()
-            if iceMix > inventory.iceCubes {            // ensure that user isn't capable of mixing supplies they haven't purchased
-                iceMix = inventory.iceCubes
+            if lemonade.iceCubes > inventory.iceCubes { // ensure that user isn't capable of mixing supplies they haven't purchased
+                lemonade.iceCubes = inventory.iceCubes
                 updateMixView()
             }
         }
     }
     
     @IBAction func lemonMixStepperPressed(sender: UIStepper) { // Mixing Lemons
-        lemonMix = Int(sender.value)                    // update lemonMix variable
+        lemonade.lemons = Int(sender.value)                    // update lemonMix variable
         updateMixView()
     }
     
     @IBAction func iceMixStepperPressed(sender: UIStepper) { // Mixing Ice Cubes
-        iceMix = Int(sender.value)                      // update iceMix variable
+        lemonade.iceCubes = Int(sender.value)                // update iceMix variable
         updateMixView()
     }
     
     @IBAction func startDayButtonPressed(sender: UIButton) {
-        
-        if lemonMix == 0 {                              // Alert user in case they forget to add lemons
+        if lemonade.lemons == 0 {                              // Alert user in case they forget to add lemons
             showMessageAlert(message: "You can't make lemonade without lemons!")
+        }else {
+            println("\nstartDay: Money(Before) = $\(inventory.money)")
+            let mixRatio:Double = Double(lemonade.iceCubes) / Double(lemonade.lemons)
+            println("startDay: Lemons: = \(lemonade.lemons), Ice = \(lemonade.iceCubes), Mix Ratio = \(mixRatio)")
+            
+            var totalSales = 0
+            myCustomers = LemonadeStand.createCustomers()
+            for customer in myCustomers {
+                if customer.tastePreference < 0.4 && mixRatio > 1 {                                             // Diluted Customer
+                    totalSales += 2
+                    println("startDay: Paid $2, Customer enjoys Diluted")
+                }else if customer.tastePreference > 0.6 && mixRatio < 1 {                                       // Acidic Customer
+                    totalSales += 2
+                    println("startDay: Paid $2, Customer enjoys Acidic")
+                }else if customer.tastePreference <= 0.6 && customer.tastePreference >= 0.4 && mixRatio == 1 {  // Equal Customer
+                    totalSales += 3
+                    println("startDay: Paid $3, Customer enjoys Equal, Mix Ratio = \(mixRatio)")
+                }else{                                                                                          // Non Customer
+                    switch customer.tastePreference {
+                    case 0.0...0.3:
+                        println("startDay: No Sale, Customer preferred Diluted")
+                    case 0.7...1:
+                        println("startDay: No Sale, Customer preferred Acidic")
+                    default:
+                        println("startDay: No Sale, Customer preferred Equal")
+                    }
+                }
+            }
+            inventory.money += totalSales
+            print("startDay: Total Sales = $\(totalSales), Money(after) = $\(inventory.money)\n")
+            if totalSales > 0 {
+                showMessageAlert(header: "Congratulations!", message: "You made $\(totalSales) today!")
+            }else{
+                showMessageAlert(header: "Sorry!", message: "No Sales were made today. Try again tomorrow!")
+            }
+            
+            // Subtract Mixed Supplies from Inventory
+            inventory.lemons -= lemonade.lemons
+            inventory.iceCubes -= lemonade.iceCubes
         }
-        
-        // Subtract Mixed Supplies from Inventory
-        inventory.lemons -= lemonMix
-        inventory.iceCubes -= iceMix
         
         // Reset View
         viewDidLoad()
@@ -135,15 +169,23 @@ class ViewController: UIViewController {
         lblLemons.text = "\(inventory.lemons)"
         lblIce.text = "\(inventory.iceCubes)"
         
-        println("Inventory: Money = \(inventory.money), Lemons = \(inventory.lemons), Ice = \(inventory.iceCubes)")
+        if inventory.money < 0 {        // Game Over
+            resetGame()
+        }
+        
+        if inventory.lemons == 0 {
+            println("\nInventory(Invalid): Money = \(inventory.money), Lemons = \(inventory.lemons), Ice = \(inventory.iceCubes)")
+        }else{
+            println("Inventory(Valid): Money = \(inventory.money), Lemons = \(inventory.lemons), Ice = \(inventory.iceCubes)")
+        }
     }
     
     func updateMixView() {
-        lblMixLemon.text = "\(lemonMix)"
-        lblMixIce.text = "\(iceMix)"
+        lblMixLemon.text = "\(lemonade.lemons)"
+        lblMixIce.text = "\(lemonade.iceCubes)"
         
-        stepperMixLemon.value = Double(lemonMix)
-        stepperMixIce.value = Double(iceMix)
+        stepperMixLemon.value = Double(lemonade.lemons)
+        stepperMixIce.value = Double(lemonade.iceCubes)
         
         if inventory.lemons > 0{
             btnStartDay.enabled = true
@@ -154,7 +196,8 @@ class ViewController: UIViewController {
             updateSupplyView()
             updateMixView()
         }
-        println("Mix: Lemons: = \(lemonMix), Ice = \(iceMix)")
+        var mixRatio:Double = Double(lemonade.iceCubes) / Double(lemonade.lemons)
+        println("Mix: Lemons: = \(lemonade.lemons), Ice = \(lemonade.iceCubes), Mix Ratio = \(mixRatio)")
     }
     
     // Helper Functions
@@ -162,6 +205,12 @@ class ViewController: UIViewController {
         var alert = UIAlertController(title: header, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func resetGame() {
+        showMessageAlert(header: "Game Over", message: "You ran out of money and supplies! Play Again?")
+        inventory = Supplies(money: 10, lemons: 1, iceCubes: 0)
+        updateSupplyView()
     }
 }
 
