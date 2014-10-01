@@ -34,11 +34,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        if inventory.money == 0 && inventory.lemons == 0 && inventory.iceCubes == 0{ // Reset Game if User runs out of credits/supplies
-            println("Game Over!")
-            resetGame()
-        }
-        
         lemonade.lemons = inventory.lemons
         lemonade.iceCubes = inventory.iceCubes
         updateView()
@@ -184,8 +179,6 @@ class ViewController: UIViewController {
             lemonade.lemons++               // Automatically add lemon to mix
             updateView()
         }
-        
-        
     }
     
     // Helper Functions
