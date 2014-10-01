@@ -10,5 +10,4 @@ import Foundation
 
 struct Customer {
     var tastePreference:Double = 0.0
-    
 }
